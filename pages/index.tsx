@@ -2,16 +2,17 @@ import { Center, Stack, Title, Text, Switch, useMantineColorScheme} from '@manti
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import DarkModeSwitch from './components/DarkModeSwitch'
 import MainSearchBar from './components/MainSeachBar'
 
 function Home() {
 	return (
 		<Center sx={{ height: "100vh"}}>
-			<Stack>
+			<Stack align='center'>
 				<Title>Better Twitch VOD Browser</Title>
-				<MainSearchBar/>
+				<MainSearchBar searchBarWidth='15vw'/>
 				<Text align='center'>Login with Twitch to get followed streamer VODs</Text>
-				<Switch />
+				<DarkModeSwitch/>
 			</Stack>
 		</Center>
 	)
