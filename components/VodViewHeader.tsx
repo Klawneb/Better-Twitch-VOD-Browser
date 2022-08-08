@@ -6,8 +6,8 @@ import MainSearchBar from "./MainSeachBar";
 
 export default function VodViewHeader() {
 
-	return <Header height={50}>
-		<Group align={'center'} position={'apart'} sx={{height: "50px"}}>
+	return <Header height={60}>
+		<Group align={'center'} position={'apart'} sx={{height: "60px", padding: "0 10px"}}>
 			<Link href="/">
 				<Button component="a" leftIcon={<ChevronLeft/>}>Back</Button>
 			</Link>
