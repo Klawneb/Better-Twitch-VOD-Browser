@@ -2,8 +2,8 @@ import { Center, Stack, Title, Text, Switch, useMantineColorScheme} from '@manti
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import DarkModeSwitch from './components/DarkModeSwitch'
-import MainSearchBar from './components/MainSeachBar'
+import DarkModeSwitch from '../components/DarkModeSwitch'
+import MainSearchBar from '../components/MainSeachBar'
 
 function Home() {
 	return (
