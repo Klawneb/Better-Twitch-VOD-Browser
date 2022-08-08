@@ -6,7 +6,7 @@ export default function DarkModeSwitch() {
 
 	return <Group spacing={"xs"}>
 		<Sun/>
-		<Switch onChange={() => toggleColorScheme()}/>
+		<Switch onChange={() => toggleColorScheme()} checked={colorScheme === 'dark'}/>
 		<Moon/>
 	</Group>
 }
