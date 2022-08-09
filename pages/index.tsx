@@ -10,7 +10,7 @@ function Home() {
 		<Center sx={{ height: "100vh"}}>
 			<Stack align='center'>
 				<Title>Better Twitch VOD Browser</Title>
-				<MainSearchBar searchBarWidth='15vw'/>
+				<MainSearchBar width='125%'/>
 				<Text align='center'>Login with Twitch to get followed streamer VODs</Text>
 				<DarkModeSwitch/>
 			</Stack>
