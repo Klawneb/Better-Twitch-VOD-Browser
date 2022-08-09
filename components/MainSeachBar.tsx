@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface MainSeachBarProps {
-	searchBarWidth?: string
+	width?: string
 }
 
 export default function MainSearchBar(props: MainSeachBarProps) {
@@ -20,9 +20,9 @@ export default function MainSearchBar(props: MainSeachBarProps) {
 		getGameNames()
 	}, [])
 
-	return <Group>
-		<Autocomplete data={gameNames} value={searchInput} onChange={setSearchInput} sx={{ flexGrow: 1, width: props.searchBarWidth}} limit={20} maxDropdownHeight={200}/>
-		<Select value={searchType} onChange={(value) => setSearchType(value ?? '')} sx={{width: '90px'}} data={[{ value: 'game', label: 'Game'}, { value: 'user', label: 'User'}]}/>
+	return <Group sx={{ width: props.width}} noWrap>
+		<Autocomplete data={gameNames} value={searchInput} onChange={setSearchInput} sx={{ flexGrow: 1, minWidth: 0}} limit={20} maxDropdownHeight={200}/>
+		<Select value={searchType} onChange={(value) => setSearchType(value ?? '')} sx={{maxWidth: '90px'}} data={[{ value: 'game', label: 'Game'}, { value: 'user', label: 'User'}]}/>
 		<Link href={`/${searchType}/${searchInput}`} passHref>
 			<Button component="a">Search</Button>
 		</Link>
