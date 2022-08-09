@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Group, Select } from "@mantine/core";
+import { Autocomplete, Button, Group, NativeSelect, Select } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,7 @@ export default function MainSearchBar(props: MainSeachBarProps) {
 
 	return <Group sx={{ width: props.width}} noWrap>
 		<Autocomplete data={gameNames} value={searchInput} onChange={setSearchInput} sx={{ flexGrow: 1, minWidth: 0}} limit={20} maxDropdownHeight={200}/>
-		<Select value={searchType} onChange={(value) => setSearchType(value ?? '')} sx={{maxWidth: '90px'}} data={[{ value: 'game', label: 'Game'}, { value: 'user', label: 'User'}]}/>
+		<NativeSelect value={searchType} onChange={(value) => setSearchType(value.target.value)} sx={{width: '90px'}} data={[{ value: 'game', label: 'Game'}, { value: 'user', label: 'User'}]}/>
 		<Link href={`/${searchType}/${searchInput}`} passHref>
 			<Button component="a">Search</Button>
 		</Link>
