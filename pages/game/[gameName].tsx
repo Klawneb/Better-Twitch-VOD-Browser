@@ -14,9 +14,7 @@ export default function GameVodView() {
 	const router = useRouter();
 	const { gameName } = router.query;
 
-	useEffect(() => {
-		console.log(searchProperties)
-	}, [searchProperties])
+	
 
 	return <div>
 		<VodViewHeader searchProperties={searchProperties} setSearchProperties={setSearchProperties}/>
