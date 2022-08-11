@@ -1,7 +1,7 @@
-import { ApiClient, HelixGame } from '@twurple/api/lib';
-import { ClientCredentialsAuthProvider } from '@twurple/auth/lib'
+import { ApiClient, HelixGame } from '@twurple/api';
+import { ClientCredentialsAuthProvider } from '@twurple/auth'
 import 'dotenv/config'
-import { searchProperties } from './interfaces';
+import { searchParameters } from './interfaces';
 
 
 const clientId: string = process.env.CLIENT_ID ?? '';
@@ -11,17 +11,17 @@ const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
 
 const apiClient = new ApiClient({ authProvider });
 
-async function getGame(gameName: string) {
+export async function getGame(gameName: string) {
 	const game = await apiClient.games.getGameByName(gameName);
 	return game ?? undefined;
 }
 
-async function getGameVods(game: HelixGame, searchProperties: searchProperties) {
+export async function getGameVods(game: HelixGame, searchParameters: searchParameters) {
 	const vods = await apiClient.videos.getVideosByGame(game.id, {
-		language: searchProperties.language,
-		period: searchProperties.period,
-		type: searchProperties.vodType,
-		orderBy: searchProperties.sortBy	
+		language: searchParameters.language,
+		period: searchParameters.period,
+		type: searchParameters.vodType,
+		orderBy: searchParameters.sortBy	
 	});
 	return vods
 }

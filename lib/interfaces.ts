@@ -1,4 +1,4 @@
-export interface searchProperties {
+export interface searchParameters {
 	language: string,
 	sortBy: SortBy,
 	period: Period,

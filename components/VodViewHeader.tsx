@@ -2,16 +2,16 @@ import { Button, Group, Header, MediaQuery, Text, Image, Select } from "@mantine
 import Link from "next/link";
 import { ChevronLeft } from "tabler-icons-react";
 import { languageCodes } from "../data/languageCodes";
-import { Period, searchProperties, SortBy, VodType } from "../lib/interfaces";
+import { Period, searchParameters, SortBy, VodType } from "../lib/interfaces";
 import DarkModeSwitch from "./DarkModeSwitch";
 import MainSearchBar from "./MainSeachBar";
 
 interface VodViewHeaderProps {
-	searchProperties: searchProperties
-	setSearchProperties(searchProperties: searchProperties): void
+	searchParameters: searchParameters
+	setsearchParameters(searchParameters: searchParameters): void
 }
 
-export default function VodViewHeader({ searchProperties, setSearchProperties}: VodViewHeaderProps) {
+export default function VodViewHeader({ searchParameters, setsearchParameters}: VodViewHeaderProps) {
 	const languages = languageCodes;
 
 	return <Header height={70}>
@@ -28,10 +28,10 @@ export default function VodViewHeader({ searchProperties, setSearchProperties}: 
 				</Link>
 				<MainSearchBar width="25%"/>
 				<Group noWrap>
-					<Select sx={{ width: "150px"}} onChange={value => setSearchProperties({...searchProperties, language: value ?? 'en' })} value={searchProperties.language} label='Language' data={languages} searchable/>
-					<Select sx={{ width: "150px"}} onChange={value => setSearchProperties({...searchProperties, sortBy: value as SortBy })} value={searchProperties.sortBy} label='Sort by' data={[{ value: 'time', label: 'Latest'}, { value: 'views', label: 'Views'}, { value: 'trending', label: 'Trending'}]}/>
-					<Select sx={{ width: "150px"}} onChange={value => setSearchProperties({...searchProperties, period: value as Period })} value={searchProperties.period}label='Period' data={[{ value: 'all', label: 'All'}, { value: 'day', label: 'Day'}, { value: 'week', label: 'Week'}, { value: 'month', label: 'Month'}]}/>
-					<Select sx={{ width: "150px"}} onChange={value => setSearchProperties({...searchProperties, vodType: value as VodType })} value={searchProperties.vodType} label='VOD type' data={[{ value: 'all', label: 'All'}, { value: 'upload', label: 'Upload'}, { value: 'archive', label: 'Archive'}, { value: 'highlight', label: 'Highlight '}]}/>
+					<Select sx={{ width: "150px"}} onChange={value => setsearchParameters({...searchParameters, language: value ?? 'en' })} value={searchParameters.language} label='Language' data={languages} searchable/>
+					<Select sx={{ width: "150px"}} onChange={value => setsearchParameters({...searchParameters, sortBy: value as SortBy })} value={searchParameters.sortBy} label='Sort by' data={[{ value: 'time', label: 'Latest'}, { value: 'views', label: 'Views'}, { value: 'trending', label: 'Trending'}]}/>
+					<Select sx={{ width: "150px"}} onChange={value => setsearchParameters({...searchParameters, period: value as Period })} value={searchParameters.period}label='Period' data={[{ value: 'all', label: 'All'}, { value: 'day', label: 'Day'}, { value: 'week', label: 'Week'}, { value: 'month', label: 'Month'}]}/>
+					<Select sx={{ width: "150px"}} onChange={value => setsearchParameters({...searchParameters, vodType: value as VodType })} value={searchParameters.vodType} label='VOD type' data={[{ value: 'all', label: 'All'}, { value: 'upload', label: 'Upload'}, { value: 'archive', label: 'Archive'}, { value: 'highlight', label: 'Highlight '}]}/>
 				</Group>
 				<DarkModeSwitch/>
 			</Group>
