@@ -1,5 +1,6 @@
 import { AspectRatio, Group, Title, Image, Space, Text } from "@mantine/core";
 import { HelixVideo } from "@twurple/api/lib";
+import { HelixVideoData } from "@twurple/api/lib/api/helix/video/HelixVideo";
 import { rawDataSymbol } from "@twurple/common";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
@@ -14,7 +15,7 @@ export default function GameVodView() {
 		period: 'all',
 		vodType: 'all'
 	})
-	const [vodResults, setVodResults] = useState<HelixVideo[]>([])
+	const [vodResults, setVodResults] = useState<HelixVideoData[]>([])
 	const router = useRouter();
 	const { gameName } = router.query;
 

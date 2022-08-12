@@ -1,9 +1,10 @@
 import { SimpleGrid, Text } from "@mantine/core"
 import { HelixVideo } from "@twurple/api"
+import { HelixVideoData } from "@twurple/api/lib/api/helix/video/HelixVideo"
 import VodCard from "./VodCard"
 
 interface VodViewProps {
-	vodList: HelixVideo[]
+	vodList: HelixVideoData[]
 }
 
 export default function VodView(props: VodViewProps) {
