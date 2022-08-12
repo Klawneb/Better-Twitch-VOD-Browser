@@ -3,6 +3,7 @@ import { HelixVideo } from "@twurple/api/lib";
 import { rawDataSymbol } from "@twurple/common";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
+import VodView from "../../components/VodView";
 import VodViewHeader from "../../components/VodViewHeader";
 import { searchParameters } from "../../lib/interfaces";
 
@@ -37,10 +38,6 @@ export default function GameVodView() {
 	return <div>
 		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters}/>
 		<Space h={"md"}/>
-		{
-			vodResults.map((vod, index) => {
-				return <Text key={index}>{vod.title}</Text>
-			})
-		}
+		<VodView vodList={vodResults}/>
 	</div>
 }
