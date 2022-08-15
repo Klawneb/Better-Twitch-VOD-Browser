@@ -15,13 +15,13 @@ export default function VodViewHeader({ searchParameters, setsearchParameters}: 
 	const languages = languageCodes;
 
 	return <Header height={70}>
-		<MediaQuery largerThan={'sm'} styles={{display: "none"}}>
+		<MediaQuery largerThan={'md'} styles={{display: "none"}}>
 			<Group align={'center'} position={'apart'} sx={{height: "60px", padding: "0 10px"}} noWrap>
 				<MainSearchBar width="100%"/>
 			</Group>
 		</MediaQuery>
 
-		<MediaQuery smallerThan={'sm'} styles={{display: "none"}}>
+		<MediaQuery smallerThan={'md'} styles={{display: "none"}}>
 			<Group align={'end'} position={'apart'} sx={{height: "60px", padding: "0 10px"}} noWrap>
 				<Link href="/">
 					<Button component="a" leftIcon={<ChevronLeft/>}>Back</Button>
