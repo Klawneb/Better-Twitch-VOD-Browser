@@ -10,7 +10,8 @@ interface VodViewProps {
 export default function VodView(props: VodViewProps) {
 	return <SimpleGrid cols={5} breakpoints={[
         { maxWidth: 1600, cols: 4, spacing: 'md' },
-        { maxWidth: 755, cols: 2, spacing: 'sm' },
+		{ maxWidth: 1200, cols: 3, spacing: 'sm' },
+        { maxWidth: 800, cols: 2, spacing: 'sm' },
       ]}>
 		{
 			props.vodList.map((video, index) => {
