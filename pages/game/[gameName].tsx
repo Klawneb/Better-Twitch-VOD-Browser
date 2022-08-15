@@ -1,4 +1,4 @@
-import { AspectRatio, Group, Title, Image, Space, Text } from "@mantine/core";
+import { AspectRatio, Group, Title, Image, Space, Text, Loader, Center } from "@mantine/core";
 import { HelixVideo } from "@twurple/api/lib";
 import { HelixVideoData } from "@twurple/api/lib/api/helix/video/HelixVideo";
 import { rawDataSymbol } from "@twurple/common";
@@ -39,6 +39,13 @@ export default function GameVodView() {
 	return <div>
 		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters}/>
 		<Space h={"md"}/>
-		<VodView vodList={vodResults}/>
+		{
+			vodResults.length === 0 ?
+			<Center sx={{height: "50%"}}>
+				<Loader size={'xl'}/>
+			</Center>
+			:
+			<VodView vodList={vodResults}/>
+		}
 	</div>
 }
