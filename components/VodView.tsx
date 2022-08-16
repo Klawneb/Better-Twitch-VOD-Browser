@@ -8,11 +8,10 @@ interface VodViewProps {
 }
 
 export default function VodView(props: VodViewProps) {
-	const { colorScheme } = useMantineColorScheme();
-	return <SimpleGrid cols={5} sx={{ backgroundColor: colorScheme === 'dark' ? '#1a1b1e' : '#f2f2f2'}} 
+	return <SimpleGrid cols={5}
 	  breakpoints={[
         { maxWidth: 1600, cols: 4, spacing: 'md' },
-		{ maxWidth: 1200, cols: 3, spacing: 'sm' },
+		{ maxWidth: 1200, cols: 2, spacing: 'sm' },
         { maxWidth: 800, cols: 2, spacing: 'sm' },
       ]}>
 		{
