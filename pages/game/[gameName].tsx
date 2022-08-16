@@ -86,6 +86,8 @@ export default function GameVodView() {
 				<Loader size={'xl'}/>
 			</Center>
 			:
+			vodResults.length != 0 
+			?
 			<Stack style={{width: "75%", margin: "0 auto"}}>
 				<VodView vodList={vodResults}/>
 				<Group position="apart">
@@ -94,6 +96,8 @@ export default function GameVodView() {
 					<Button onClick={() => {getVodsAfter(gameName as string, searchParameters, paginationToken); setPageNo(prevState => prevState + 1)}}>Next Page</Button>
 				</Group>
 			</Stack>
+			:
+			<Title align="center">No VODs found for this game</Title>
 		}
 		</div>
 	</Stack>
