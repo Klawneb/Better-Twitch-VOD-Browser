@@ -25,3 +25,25 @@ export async function getGameVods(game: HelixGame, searchParameters: searchParam
 	});
 	return vods
 }
+
+export async function getGameVodsAfter(game: HelixGame, searchParameters: searchParameters, paginationToken: string) {
+	const vods = await apiClient.videos.getVideosByGame(game.id, {
+		language: searchParameters.language,
+		period: searchParameters.period,
+		type: searchParameters.vodType,
+		orderBy: searchParameters.sortBy,
+		after: paginationToken
+	});
+	return vods
+}
+
+export async function getGameVodsBefore(game: HelixGame, searchParameters: searchParameters, paginationToken: string) {
+	const vods = await apiClient.videos.getVideosByGame(game.id, {
+		language: searchParameters.language,
+		period: searchParameters.period,
+		type: searchParameters.vodType,
+		orderBy: searchParameters.sortBy,
+		before: paginationToken
+	});
+	return vods
+}
