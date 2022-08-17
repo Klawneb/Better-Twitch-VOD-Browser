@@ -1,4 +1,4 @@
-import { Button, Group, Header, MediaQuery, Text, Image, Select } from "@mantine/core";
+import { Button, Group, Header, MediaQuery, Text, Image, Select, Space } from "@mantine/core";
 import Link from "next/link";
 import { ChevronLeft } from "tabler-icons-react";
 import { languageCodes } from "../data/languageCodes";
@@ -16,13 +16,13 @@ export default function VodViewHeader({ searchParameters, setsearchParameters}: 
 
 	return <Header height={70}>
 		<MediaQuery largerThan={'md'} styles={{display: "none"}}>
-			<Group align={'center'} position={'apart'} sx={{height: "60px", padding: "0 10px"}} noWrap>
+			<Group align={'center'} position={'apart'} sx={{height: "60px", padding: "0 10px", marginBottom: "10px"}} noWrap>
 				<MainSearchBar width="100%"/>
 			</Group>
 		</MediaQuery>
 
 		<MediaQuery smallerThan={'md'} styles={{display: "none"}}>
-			<Group align={'end'} position={'apart'} sx={{height: "60px", padding: "0 10px"}} noWrap>
+			<Group align={'end'} position={'apart'} sx={{height: "60px", padding: "0 10px", marginBottom: "10px"}} noWrap>
 				<Link href="/">
 					<Button component="a" leftIcon={<ChevronLeft/>}>Back</Button>
 				</Link>
