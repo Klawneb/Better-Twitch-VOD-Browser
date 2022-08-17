@@ -19,7 +19,7 @@ export default function VodCard({ vod }: VodCardProps) {
 	}
 
 	useEffect(() => {
-		setThumbnailUrl(formatThumbnailURL(vod.thumbnail_url, 480, 360))
+		setThumbnailUrl(formatThumbnailURL(vod.thumbnail_url, 480, 270))
 	}, [vod.thumbnail_url])
 
 	return (<Card shadow={'lg'} radius={10} p={0}>
