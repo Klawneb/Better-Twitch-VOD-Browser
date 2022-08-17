@@ -33,7 +33,7 @@ export default function VodCard({ vod }: VodCardProps) {
 						<Image withPlaceholder alt="No thumbnail found"/>
 					}
 				</Anchor>
-				{overlayVisible && <Text sx={{zIndex: 2}} p={50} size={24} color={'white'}>{vod.title}</Text>}
+				{overlayVisible && <Text sx={{zIndex: 2}} px={25} size={18} color={'white'}>{vod.title}</Text>}
 				{overlayVisible && <Overlay opacity={0.6} blur={2} color="#000" zIndex={0}>hello</Overlay>}
 			</AspectRatio>
 		</Card.Section>
