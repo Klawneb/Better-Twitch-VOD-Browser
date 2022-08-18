@@ -15,7 +15,8 @@ export default function GameVodView() {
 		period: 'all',
 		vodType: 'all'
 	})
-	const [vodResults, setVodResults] = useState<HelixVideoData[]>([])
+	const [vodResults, setVodResults] = useState<HelixVideoData[]>([]);
+	const [filteredVods, setFilteredVods] = useState<HelixVideoData[]>([]);
 	const [pageNo, setPageNo] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +37,11 @@ export default function GameVodView() {
 		setVodResults(vodData);
 		setIsLoading(false);
 	}
+
+	useEffect(() => {
+		setFilteredVods(vodResults.filter((vod, index) => index < (pageNo * 20) && index >= ((pageNo - 1) * 20))
+		)
+	}, [vodResults, pageNo])
 
 	useEffect(() => {
 		if (router.isReady) {
@@ -62,12 +68,14 @@ export default function GameVodView() {
 			vodResults.length != 0 
 			?
 			<Stack style={{width: "75%", margin: "0 auto"}}>
-				<VodView vodList={vodResults}/>
+				<VodView vodList={filteredVods}/>
 				<Group position="apart">
 					<Button disabled={pageNo === 1} onClick={() => {
+						setPageNo(prevState => prevState - 1);
 					}}>Previous Page</Button>
 					<Text>Page {pageNo}</Text>
 					<Button onClick={() => {
+						setPageNo(prevState => prevState + 1);
 					}}>Next Page</Button>
 				</Group>
 			</Stack>
