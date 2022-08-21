@@ -16,7 +16,9 @@ export default function GameVodView() {
 		vodType: 'all'
 	})
 	const [vodResults, setVodResults] = useState<HelixVideoData[]>([]);
-	const [filteredVods, setFilteredVods] = useState<HelixVideoData[]>([]);
+	const [filteredResults, setFilteredResults] = useState<HelixVideoData[]>([])
+	const [currentPage, setCurrentPage] = useState<HelixVideoData[]>([]);
+	const [nameFilter, setNameFilter] = useState('');
 	const [pageNo, setPageNo] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -38,11 +40,21 @@ export default function GameVodView() {
 		setIsLoading(false);
 	}
 
+	//Only display 20 vods at a time, based on page number
 	useEffect(() => {
-		setFilteredVods(vodResults.filter((vod, index) => index < (pageNo * 20) && index >= ((pageNo - 1) * 20))
-		)
-	}, [vodResults, pageNo])
+		setCurrentPage(filteredResults.filter((vod, index) => index < (pageNo * 20) && index >= ((pageNo - 1) * 20)));
+	}, [filteredResults, pageNo])
 
+	useEffect(() => {
+		if (nameFilter != '') {
+			setFilteredResults(vodResults.filter(vod => vod.user_name.toLowerCase().includes(nameFilter.toLowerCase())));
+		}
+		else {
+			setFilteredResults(vodResults);
+		}
+	}, [nameFilter, vodResults])
+
+	//Load vods on page load, and when search parameters or game name changes
 	useEffect(() => {
 		if (router.isReady) {
 			if (vodResults.length != 0) {
@@ -54,7 +66,15 @@ export default function GameVodView() {
 	}, [router.isReady, gameName, searchParameters])
 
 	return <Stack sx={{height: "100vh"}} spacing={0}>
-		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters}/>
+		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters} nameFilter={nameFilter} setNameFilter={setNameFilter} nameList={(() => {
+			let names: string[] = []
+			vodResults.forEach(vod => {
+				if (!names.includes(vod.user_name)) {
+					names.push(vod.user_name)
+				}
+			})
+			return names
+		})()}/>
 		<div style={{backgroundColor: colorScheme === 'dark' ? '#1a1b1e' : '#f2f2f2', flexGrow: 1, padding: 20}}>
 		{
 			isLoading ?
@@ -68,7 +88,7 @@ export default function GameVodView() {
 			vodResults.length != 0 
 			?
 			<Stack style={{width: "75%", margin: "0 auto"}}>
-				<VodView vodList={filteredVods}/>
+				<VodView vodList={currentPage}/>
 				<Group position="apart">
 					<Button disabled={pageNo === 1} onClick={() => {
 						setPageNo(prevState => prevState - 1);
