@@ -1,4 +1,4 @@
-import { Card, Image, Text, AspectRatio, Group, Tooltip, Overlay, Space, Anchor, useMantineColorScheme } from "@mantine/core";
+import { Card, Image, Text, AspectRatio, Group, Tooltip, Overlay, Space, Anchor, useMantineColorScheme, MediaQuery } from "@mantine/core";
 import { HelixVideoData } from "@twurple/api/lib/api/helix/video/HelixVideo";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -45,7 +45,9 @@ export default function VodCard({ vod }: VodCardProps) {
 			</Group>
 			<Space h={"xs"}/>
 			<Group noWrap position="apart">
-				<Text lineClamp={1}>{vod.view_count} views</Text>
+				<MediaQuery smallerThan={1500} styles={{display: "none"}}>
+					<Text lineClamp={1}>{vod.view_count} views</Text>
+				</MediaQuery>
 				<Anchor href={`https://twitch.tv/${vod.user_name}`}>{vod.user_name}</Anchor>
 				<Text lineClamp={1}>{vod.duration}</Text>
 			</Group>
