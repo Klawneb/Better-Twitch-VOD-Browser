@@ -17,7 +17,7 @@ export default function MainSearchBar(props: MainSeachBarProps) {
 	}
 
 	return <Group sx={{ width: props.width}} noWrap>
-		<Autocomplete onDropdownOpen={getGameNames} data={gameNames} value={searchInput} onChange={setSearchInput} sx={{ flexGrow: 1, minWidth: 0}} limit={20} maxDropdownHeight={200}/>
+		<Autocomplete onDropdownOpen={getGameNames} data={searchType == 'game' ? gameNames : []} value={searchInput} onChange={setSearchInput} sx={{ flexGrow: 1, minWidth: 0}} limit={20} maxDropdownHeight={200}/>
 		<NativeSelect value={searchType} onChange={(value) => setSearchType(value.target.value)} sx={{width: '90px'}} data={[{ value: 'game', label: 'Game'}, { value: 'user', label: 'User'}]}/>
 		<Link href={`/${searchType}/${searchInput}`} passHref>
 			<Button component="a">Search</Button>
