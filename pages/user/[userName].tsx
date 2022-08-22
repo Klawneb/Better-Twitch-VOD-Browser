@@ -8,7 +8,7 @@ import VodView from "../../components/VodView";
 import VodViewHeader from "../../components/VodViewHeader";
 import { searchParameters } from "../../lib/interfaces";
 
-export default function GameVodView() {
+export default function UserVodView() {
 	const [searchParameters, setsearchParameters] = useState<searchParameters>({
 		language: 'en',
 		sortBy: 'time',
@@ -18,18 +18,18 @@ export default function GameVodView() {
 	const [vodResults, setVodResults] = useState<HelixVideoData[]>([]);
 	const [filteredResults, setFilteredResults] = useState<HelixVideoData[]>([])
 	const [currentPage, setCurrentPage] = useState<HelixVideoData[]>([]);
-	const [nameFilter, setNameFilter] = useState('');
+	const [gameFilter, setGameFilter] = useState('');
 	const [pageNo, setPageNo] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const router = useRouter();
-	const { gameName } = router.query;
+	const { userName } = router.query;
 
 	const { colorScheme } = useMantineColorScheme()
 
-	async function getVods(gameName: string, searchParameters: searchParameters) {
+	async function getVods(userName: string, searchParameters: searchParameters) {
 		setIsLoading(true);
-		const vods = await fetch(`/api/vods/game/${gameName}?` + new URLSearchParams({
+		const vods = await fetch(`/api/vods/user/${userName}?` + new URLSearchParams({
 			language: searchParameters.language,
 			sortBy: searchParameters.sortBy,
 			period: searchParameters.period,
@@ -46,13 +46,13 @@ export default function GameVodView() {
 	}, [filteredResults, pageNo])
 
 	useEffect(() => {
-		if (nameFilter != '') {
-			setFilteredResults(vodResults.filter(vod => vod.user_name.toLowerCase().includes(nameFilter.toLowerCase())));
+		if (gameFilter != '') {
+			setFilteredResults(vodResults.filter(vod => vod.user_name.toLowerCase().includes(gameFilter.toLowerCase())));
 		}
 		else {
 			setFilteredResults(vodResults);
 		}
-	}, [nameFilter, vodResults])
+	}, [gameFilter, vodResults])
 
 	//Load vods on page load, and when search parameters or game name changes
 	useEffect(() => {
@@ -60,13 +60,13 @@ export default function GameVodView() {
 			if (vodResults.length != 0) {
 				setVodResults([]);
 			}
-			getVods(gameName as string, searchParameters)
+			getVods(userName as string, searchParameters)
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [router.isReady, gameName, searchParameters])
+	}, [router.isReady, userName, searchParameters])
 
 	return <Stack sx={{height: "100vh"}} spacing={0}>
-		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters} nameFilter={nameFilter} setNameFilter={setNameFilter} nameList={(() => {
+		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters} nameFilter={gameFilter} setNameFilter={setGameFilter} nameList={(() => {
 			let names: string[] = []
 			vodResults.forEach(vod => {
 				if (!names.includes(vod.user_name)) {
@@ -100,7 +100,7 @@ export default function GameVodView() {
 				</Group>
 			</Stack>
 			:
-			<Title align="center">No VODs found for this game</Title>
+			<Title align="center">No VODs found for this user</Title>
 		}
 		</div>
 	</Stack>
