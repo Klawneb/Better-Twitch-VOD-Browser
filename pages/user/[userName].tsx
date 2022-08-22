@@ -66,15 +66,7 @@ export default function UserVodView() {
 	}, [router.isReady, userName, searchParameters])
 
 	return <Stack sx={{height: "100vh"}} spacing={0}>
-		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters} nameFilter={gameFilter} setNameFilter={setGameFilter} nameList={(() => {
-			let names: string[] = []
-			vodResults.forEach(vod => {
-				if (!names.includes(vod.user_name)) {
-					names.push(vod.user_name)
-				}
-			})
-			return names
-		})()}/>
+		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters}/>
 		<div style={{backgroundColor: colorScheme === 'dark' ? '#1a1b1e' : '#f2f2f2', flexGrow: 1, padding: 20}}>
 		{
 			isLoading ?
