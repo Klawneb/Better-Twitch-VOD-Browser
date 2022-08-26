@@ -1,5 +1,6 @@
 import { Center, Stack, Title, Text, Switch, useMantineColorScheme} from '@mantine/core'
 import type { NextPage } from 'next'
+import { signIn } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import DarkModeSwitch from '../components/DarkModeSwitch'
@@ -11,7 +12,7 @@ function Home() {
 			<Stack align='center'>
 				<Title>Better Twitch VOD Browser</Title>
 				<MainSearchBar width='125%'/>
-				<Text align='center'>Login with Twitch to get followed streamer VODs</Text>
+				<Text align='center'><Text onClick={() => signIn()} underline component='span'>Login with Twitch</Text> to get followed streamer VODs</Text>
 				<DarkModeSwitch/>
 			</Stack>
 		</Center>
