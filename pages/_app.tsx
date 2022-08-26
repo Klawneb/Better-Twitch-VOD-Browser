@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { useState } from 'react'
 import { useLocalStorage } from '@mantine/hooks'
+import { SessionProvider } from 'next-auth/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
 			<MantineProvider theme={{colorScheme}} withGlobalStyles withNormalizeCSS>
-				<Component {...pageProps} />
+				<SessionProvider session={pageProps.session}>
+					<Component {...pageProps} />
+				</SessionProvider>
 			</MantineProvider>
 		</ColorSchemeProvider>
 	)
