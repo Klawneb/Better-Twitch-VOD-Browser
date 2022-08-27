@@ -19,7 +19,22 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-			<MantineProvider theme={{colorScheme}} withGlobalStyles withNormalizeCSS>
+			<MantineProvider theme={{colorScheme, colors: {
+				'twitch': [
+					"#C7B9DB",
+					"#B29AD5",
+					"#9E7AD4",
+					"#8A55DA",
+					"#772CE8",
+					"#6C2CCC",
+					"#6436A9",
+					"#5C3B8E",
+					"#553D78",
+					"#4D3C67",
+				  ]
+				},
+				primaryColor: 'twitch'
+			}} withGlobalStyles withNormalizeCSS>
 				<SessionProvider session={pageProps.session}>
 					<Component {...pageProps} />
 				</SessionProvider>
