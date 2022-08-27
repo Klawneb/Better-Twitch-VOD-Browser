@@ -1,6 +1,6 @@
-import { Center, Stack, Title, Text, Switch, useMantineColorScheme, Group, Anchor} from '@mantine/core'
+import { Center, Stack, Title, Text, Switch, useMantineColorScheme, Group, Anchor, Avatar} from '@mantine/core'
 import type { NextPage } from 'next'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,16 +16,21 @@ function Home() {
 				<Title>Better Twitch VOD Browser</Title>
 				<MainSearchBar width='125%'/>
 				{
-					session ?
+					session.data ?
 					<Group position='apart' grow sx={{width: "125%"}}>
-						<Text  align="center">Signed in as {session.data?.user?.name}</Text>
+						<Group position='right'>
+							<Avatar radius={'lg'} src={session.data.user?.image}/>
+							<Link href={`https://twitch.tv/${session.data.user?.name}`} passHref>
+								<Anchor component='a' align='end'>{session.data.user?.name}</Anchor>
+							</Link>
+						</Group>
 						<Link href={"/followed"}>
 							<Anchor component='a' align='center'>Followed VODs</Anchor>
 						</Link>
-						<Text variant='link' align='center' sx={{cursor: "pointer"}}>Sign Out</Text>
+						<Text variant='link' onClick={() => signOut()} align='start' sx={{cursor: "pointer"}}>Sign Out</Text>
 					</Group>
 					:
-					<Text align='center'><Text onClick={() => signIn()} underline component='span'>Login with Twitch</Text> to get followed streamer VODs</Text>
+					<Text align='center'><Text onClick={() => signIn()} sx={{cursor: "pointer"}} variant='link' component='span'>Sign in with Twitch</Text> to get followed streamer VODs</Text>
 				}
 				<DarkModeSwitch/>
 			</Stack>
