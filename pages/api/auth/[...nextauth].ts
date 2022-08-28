@@ -10,5 +10,10 @@ export default NextAuth({
             clientId: clientId,
             clientSecret: clientSecret
         })
-    ]
+    ],
+	callbacks: {
+		redirect() {
+			return "/"
+		}
+	}
 })
