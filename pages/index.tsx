@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import DarkModeSwitch from '../components/DarkModeSwitch'
 import MainSearchBar from '../components/MainSeachBar'
+import TwitchSignInButton from '../components/TwitchSignInButton'
 
 function Home() {
 	const session = useSession();
@@ -30,7 +31,10 @@ function Home() {
 						<Text variant='link' onClick={() => signOut()} align='start' sx={{cursor: "pointer"}}>Sign Out</Text>
 					</Group>
 					:
-					<Text align='center'><Text onClick={() => signIn()} sx={{cursor: "pointer"}} variant='link' component='span'>Sign in with Twitch</Text> to get followed streamer VODs</Text>
+					<Group>
+						<TwitchSignInButton/>
+						<Text align='center'>to get followed streamer VODs</Text>
+					</Group>
 				}
 				<DarkModeSwitch/>
 			</Stack>
