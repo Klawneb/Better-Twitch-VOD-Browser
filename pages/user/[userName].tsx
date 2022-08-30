@@ -16,10 +16,6 @@ export default function UserVodView() {
 		vodType: 'all'
 	})
 	const [vodResults, setVodResults] = useState<HelixVideoData[]>([]);
-	const [filteredResults, setFilteredResults] = useState<HelixVideoData[]>([])
-	const [currentPage, setCurrentPage] = useState<HelixVideoData[]>([]);
-	const [gameFilter, setGameFilter] = useState('');
-	const [pageNo, setPageNo] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const router = useRouter();
@@ -40,20 +36,6 @@ export default function UserVodView() {
 		setIsLoading(false);
 	}
 
-	//Only display 20 vods at a time, based on page number
-	useEffect(() => {
-		setCurrentPage(filteredResults.filter((vod, index) => index < (pageNo * 20) && index >= ((pageNo - 1) * 20)));
-	}, [filteredResults, pageNo])
-
-	useEffect(() => {
-		if (gameFilter != '') {
-			setFilteredResults(vodResults.filter(vod => vod.user_name.toLowerCase().includes(gameFilter.toLowerCase())));
-		}
-		else {
-			setFilteredResults(vodResults);
-		}
-	}, [gameFilter, vodResults])
-
 	//Load vods on page load, and when search parameters or game name changes
 	useEffect(() => {
 		if (router.isReady) {
@@ -66,7 +48,7 @@ export default function UserVodView() {
 	}, [router.isReady, userName, searchParameters])
 
 	return <Stack sx={{height: "100vh"}} spacing={0}>
-		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters}/>
+		<VodViewHeader searchParameters={searchParameters} setsearchParameters={setsearchParameters} />
 		<div style={{backgroundColor: colorScheme === 'dark' ? '#1a1b1e' : '#f2f2f2', flexGrow: 1, padding: 20}}>
 		{
 			isLoading ?
@@ -80,16 +62,7 @@ export default function UserVodView() {
 			vodResults.length != 0 
 			?
 			<Stack style={{width: "75%", margin: "0 auto"}}>
-				<VodView vodList={currentPage}/>
-				<Group position="apart">
-					<Button disabled={pageNo === 1} onClick={() => {
-						setPageNo(prevState => prevState - 1);
-					}}>Previous Page</Button>
-					<Text>Page {pageNo}</Text>
-					<Button onClick={() => {
-						setPageNo(prevState => prevState + 1);
-					}}>Next Page</Button>
-				</Group>
+				<VodView vodList={vodResults}/>
 			</Stack>
 			:
 			<Title align="center">No VODs found for this user</Title>
