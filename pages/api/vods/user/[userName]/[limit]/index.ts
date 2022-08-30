@@ -9,7 +9,7 @@ export default async function handler(
 	  const user = await getUser(userName as string);
   
 	  if (user) {
-		  let vods = await getUserVodsLimited(user, Number(limit as string));
+		  let vods = await getUserVodsLimited(user, Number(limit as string), 'archive');
 		  res.status(200).json(
 			  vods
 		  );
