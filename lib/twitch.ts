@@ -2,7 +2,7 @@ import { ApiClient, HelixGame, HelixUser } from '@twurple/api';
 import { ClientCredentialsAuthProvider } from '@twurple/auth'
 import { rawDataSymbol } from '@twurple/common';
 import 'dotenv/config'
-import { searchParameters } from './interfaces';
+import { searchParameters, VodType } from './interfaces';
 
 
 const clientId: string = process.env.CLIENT_ID ?? '';
@@ -42,9 +42,10 @@ export async function getUserVods(user: HelixUser, searchParameters: searchParam
 	return vods;
 }
 
-export async function getUserVodsLimited(user: HelixUser, limit: number) {
+export async function getUserVodsLimited(user: HelixUser, limit: number, type: VodType) {
 	const vods = await apiClient.videos.getVideosByUser(user, {
 		limit,
+		type
 	})
 	return vods.data.map(vod => vod[rawDataSymbol]);
 }
