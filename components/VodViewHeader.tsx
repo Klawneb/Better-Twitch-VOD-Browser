@@ -35,7 +35,8 @@ export default function VodViewHeader({ searchParameters, setsearchParameters, n
 					<Text>Name Filter:</Text>
 					<Autocomplete data={nameList} onChange={setNameFilter} value={nameFilter}/>
 				</Group>
-				: <div/>}
+				: 
+				null}
 				{
 					searchParameters && setsearchParameters ?
 					<Group noWrap>
