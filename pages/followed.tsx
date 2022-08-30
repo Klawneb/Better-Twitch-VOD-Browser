@@ -1,4 +1,4 @@
-import { Stack, Title, Text, Center, Button } from "@mantine/core";
+import { Stack, Title, Text, Center, Button, Loader } from "@mantine/core";
 import { HelixVideoData } from "@twurple/api/lib/api/helix/video/HelixVideo";
 import { signIn, useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
@@ -9,6 +9,8 @@ export default function Followed() {
 	const session = useSession();
 	const [followedUsers, setFollowedUsers] = useState<string[]>([]);
     const [followedVods, setFollowedVods] = useState<HelixVideoData[]>([]);
+	const [amountLoaded, setAmountLoaded] = useState<number>(0);
+	const [bannedUsers, setBannedUsers] = useState<number>(0);
 
 	useEffect(() => {
 		if (session.status === 'authenticated') {
@@ -22,19 +24,38 @@ export default function Followed() {
 	}, [session.status, session.data?.user?.name])
 
     useEffect(() => {
-        followedUsers.forEach(async username => {
-            let vods: HelixVideoData[] = await (await fetch(`/api/vods/user/${username}/10`)).json();
-            setFollowedVods(prevState => [...prevState, ...vods]);
-        })
-    }, [followedUsers])
+		if (followedUsers.length != 0) {
+			followedUsers.forEach(async username => {
+				const response = await fetch(`/api/vods/user/${username}/10`);
+				if (response.ok) {
+					const vods = await response.json();
+					setFollowedVods(prevState => [...prevState, ...vods]);
+					setAmountLoaded(prevState => prevState + 1)
+				}
+				else {
+					setBannedUsers(prevState => prevState + 1)
+				}
+			})
+		}
+    }, [followedUsers.length])
 
 	return (
 		session.status === 'authenticated' ?
 		<Stack>
 			<VodViewHeader pageTitle={"Followed VODs"}/>
+			{
+			amountLoaded != 0 && amountLoaded === (followedUsers.length - bannedUsers) ?
             <VodView vodList={followedVods.sort((a, b) => {
                 return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
             })}/>
+			:
+			<Center sx={{height: "50%"}}>
+				<Stack align={'center'}>
+					<Title>Loading your follows {followedUsers.length > 0 ? `${amountLoaded}/${followedUsers.length - bannedUsers}` : null}</Title>
+					<Loader size={'xl'}/>
+				</Stack>
+			</Center>
+		}
 		</Stack>
 		:
 		<Center sx={{height: "100vh"}}>
