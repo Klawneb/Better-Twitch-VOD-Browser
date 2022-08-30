@@ -61,9 +61,7 @@ export default function UserVodView() {
 			:
 			vodResults.length != 0 
 			?
-			<Stack style={{width: "75%", margin: "0 auto"}}>
-				<VodView vodList={vodResults}/>
-			</Stack>
+			<VodView vodList={vodResults}/>
 			:
 			<Title align="center">No VODs found for this user</Title>
 		}

@@ -80,9 +80,7 @@ export default function GameVodView() {
 			:
 			vodResults.length != 0 
 			?
-			<Stack style={{width: "75%", margin: "0 auto"}}>
-				<VodView vodList={filteredResults}/>
-			</Stack>
+			<VodView vodList={filteredResults}/>
 			:
 			<Title align="center">No VODs found for this game</Title>
 		}
