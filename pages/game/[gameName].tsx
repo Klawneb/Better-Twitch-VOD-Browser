@@ -27,15 +27,19 @@ export default function GameVodView() {
 
 	async function getVods(gameName: string, searchParameters: searchParameters) {
 		setIsLoading(true);
-		const vods = await fetch(`/api/vods/game/${gameName}?` + new URLSearchParams({
+		const response = await fetch(`/api/vods/game/${gameName}?` + new URLSearchParams({
 			language: searchParameters.language,
 			sortBy: searchParameters.sortBy,
 			period: searchParameters.period,
 			vodType: searchParameters.vodType
 		}))
-		const vodData: HelixVideoData[] = await vods.json();
-		setVodResults(vodData);
-		setIsLoading(false);
+		if (response.ok) {
+			const vodData: HelixVideoData[] = await response.json();
+			setVodResults(vodData);
+			setIsLoading(false);
+		} else {
+			setIsLoading(false);
+		}
 	}
 	
 	useEffect(() => {
