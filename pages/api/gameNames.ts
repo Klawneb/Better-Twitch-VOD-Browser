@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import jsonfile from 'jsonfile';
 
 interface Game {
   id: string;
