@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import jsonfile from 'jsonfile';
 
 interface Game {
-  id: string,
-  name: string,
-  box_art_url: string
+  id: string;
+  name: string;
+  box_art_url: string;
 }
 
 const game_info: Game[] = jsonfile.readFileSync('./data/game_info.json');
-const game_names = game_info.map(game => game.name);
+const game_names = game_info.map((game) => game.name);
 
 export default function handler(
   req: NextApiRequest,
