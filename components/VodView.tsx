@@ -27,13 +27,14 @@ export default function VodView(props: VodViewProps) {
           { maxWidth: 1600, cols: 4, spacing: 'md' },
           { maxWidth: 1200, cols: 2, spacing: 'sm' },
           { maxWidth: 800, cols: 2, spacing: 'sm' },
+		  { maxWidth: 400, cols: 1, spacing: 'sm' },
         ]}
       >
         {currentPage.map((video, index) => {
           return <VodCard key={index} vod={video} />;
         })}
       </SimpleGrid>
-      <Group position="apart">
+      <Group position="apart" noWrap>
         <Button
           disabled={pageNo === 1}
           onClick={() => {

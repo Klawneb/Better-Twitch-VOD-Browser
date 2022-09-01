@@ -73,9 +73,11 @@ export default function VodCard({ vod }: VodCardProps) {
           >
             {vod.title}
           </Text>
-          <Text sx={{ minWidth: '100px' }} align="end">
-            {format(new Date(vod.published_at), 'do-MMM-yy')}
-          </Text>
+		  <MediaQuery smallerThan={500} styles={{ display: 'none' }}>
+			<Text sx={{ minWidth: '100px' }} align="end">
+				{format(new Date(vod.published_at), 'do-MMM-yy')}
+			</Text>
+          </MediaQuery>
         </Group>
         <Space h={'xs'} />
         <Group noWrap position="apart">

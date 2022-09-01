@@ -8,11 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-interface MainSeachBarProps {
-  width?: string;
-}
-
-export default function MainSearchBar(props: MainSeachBarProps) {
+export default function MainSearchBar() {
   const [searchType, setSearchType] = useState<string>('game');
   const [searchInput, setSearchInput] = useState<string>('');
   const [gameNames, setGameNames] = useState<string[]>([]);
@@ -29,7 +25,7 @@ export default function MainSearchBar(props: MainSeachBarProps) {
         event.preventDefault();
         router.push(`/${searchType}/${searchInput}`);
       }}
-      style={{ width: props.width }}
+      style={{ width: "100%" }}
     >
       <Group noWrap>
         <Autocomplete
