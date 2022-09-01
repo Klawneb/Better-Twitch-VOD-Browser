@@ -7,12 +7,11 @@ interface Game {
   box_art_url: string;
 }
 
-const game_info: Game[] = jsonfile.readFileSync('./data/game_info.json');
-const game_names = game_info.map((game) => game.name);
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<string[]>
 ) {
-  res.status(200).json(game_names);
+  let response = await fetch('https://raw.githubusercontent.com/Nerothos/TwithGameList/master/game_info.json');
+  let game_names: Game[] = await response.json()
+  res.status(200).json(game_names.map(game => game.name));
 }
