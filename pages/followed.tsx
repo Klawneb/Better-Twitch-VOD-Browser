@@ -51,7 +51,7 @@ export default function Followed() {
 			:
 			<Center sx={{height: "50%"}}>
 				<Stack align={'center'}>
-					<Title>Loading your follows {followedUsers.length > 0 ? `${amountLoaded}/${followedUsers.length - bannedUsers}` : null}</Title>
+					<Title>Loading streamers you follow {followedUsers.length > 0 ? `${amountLoaded}/${followedUsers.length - bannedUsers}` : null}</Title>
 					<Loader size={'xl'}/>
 				</Stack>
 			</Center>
