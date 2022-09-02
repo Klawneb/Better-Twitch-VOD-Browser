@@ -103,7 +103,7 @@ export default function VodViewHeader({
                 ]}
               />
             </Group>
-          ) : null}
+          ) : <></>}
       </MediaQuery>
 
       <MediaQuery smallerThan={'md'} styles={{ display: 'none' }}>
@@ -194,7 +194,7 @@ export default function VodViewHeader({
                 ]}
               />
             </Group>
-          ) : null}
+          ) : <></>}
           {pageTitle ? <Title>{pageTitle}</Title> : null}
           <DarkModeSwitch />
         </Group>
