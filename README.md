@@ -1,6 +1,6 @@
 # Better Twitch VOD Browser
 
-Live at [btvb.mewtant.uk)
+Live [here](btvb.mewtant.uk)
 
 An easier way to browse Twitch VODs, allowing you to browse a range of time periods, and with more options for sorting. You can sign in with Twitch to display all recent VODs from people you follow, making it easier to browse any recent streams you may have missed.
 
